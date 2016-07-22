@@ -139,13 +139,13 @@ img {
   max-width: 739px;
   padding: 5px;
   margin: 10px 0 10px 0;
-  border: 1px solid #ebebeb;
+  /*border: 1px solid #ebebeb;*/
 
-  box-shadow: 0 0 5px #ebebeb;
-  -webkit-box-shadow: 0 0 5px #ebebeb;
-  -moz-box-shadow: 0 0 5px #ebebeb;
-  -o-box-shadow: 0 0 5px #ebebeb;
-  -ms-box-shadow: 0 0 5px #ebebeb;
+  /*box-shadow: 0 0 5px #ebebeb;*/
+  /*-webkit-box-shadow: 0 0 5px #ebebeb;*/
+  /*-moz-box-shadow: 0 0 5px #ebebeb;*/
+  /*-o-box-shadow: 0 0 5px #ebebeb;*/
+  /*-ms-box-shadow: 0 0 5px #ebebeb;*/
 }
 
 p img {
@@ -287,12 +287,12 @@ Full-Width Styles
 }
 
 #header_wrap {
-  background: #212121;
-  background: -moz-linear-gradient(top, #373737, #212121);
-  background: -webkit-linear-gradient(top, #373737, #212121);
-  background: -ms-linear-gradient(top, #373737, #212121);
-  background: -o-linear-gradient(top, #373737, #212121);
-  background: linear-gradient(top, #373737, #212121);
+  background: #FFF;
+  /*background: -moz-linear-gradient(top, #373737, #212121);*/
+  /*background: -webkit-linear-gradient(top, #373737, #212121);*/
+  /*background: -ms-linear-gradient(top, #373737, #212121);*/
+  /*background: -o-linear-gradient(top, #373737, #212121);*/
+  /*background: linear-gradient(top, #373737, #212121);*/
 }
 
 #header_wrap .inner {
@@ -301,11 +301,16 @@ Full-Width Styles
 
 #project_title {
   margin: 0;
-  color: #fff;
+  color: #000;
   font-size: 42px;
   font-weight: 700;
-  text-shadow: #111 0px 0px 10px;
+  text-shadow: #aaa 0px 0px 10px;
+  text-align: center;
 }
+#title-photo {
+  text-align: center;
+}
+
 
 #project_tagline {
   color: #fff;
@@ -314,6 +319,30 @@ Full-Width Styles
   background: none;
   text-shadow: #111 0px 0px 10px;
 }
+
+#link_bar {
+  font-weight:300;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.link-button {
+  cursor:pointer;
+}
+.link-button:first-child {
+  margin-right: 10px;
+}
+.link-button:last-child{
+  margin-left: 10px;
+}
+.block-header{
+  font-size: 40px;
+  text-align: center;
+}
+
 
 #downloads {
   position: absolute;
@@ -358,6 +387,17 @@ Full-Width Styles
   background: #f2f2f2;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
+  min-height: 500px;
+}
+
+.content-block {
+  margin: 0 auto;
+  display: none;
+  max-width: 640px;
+}
+#section-header {
+  font-size: larger;
+  font-weight: bold;
 }
 
 #main_content {
@@ -367,7 +407,12 @@ Full-Width Styles
 #footer_wrap {
   background: #212121;
 }
-
+#social {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
 /*******************************************************************************
