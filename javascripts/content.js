@@ -8,4 +8,4 @@ document.getElementById("intro").textContent =
   "I enjoy reading, playing basketball and travelling, and is always up for an adventure.";
 
 document.getElementById("now").textContent =
-  "Finishing up my internship with Goldman Sachs Singapore and heading back to school for my final year.";
+  "Finishing up my last semester, take a trip to Europe and then on to my next adventure!";
