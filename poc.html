@@ -92,7 +92,7 @@
       ).then(resp =>
         resp.json().then(e => {
           document.getElementById("result").innerHTML =
-            "<pre>" + JSON.stringify(e.value[0], undefined, 2) + "</pre>";
+            "<pre>" + JSON.stringify(e, undefined, 2) + "</pre>";
         })
       );
 
