@@ -88,4 +88,3 @@
 
 })(jQuery);
 
-fetch("https://pelive.gic.com.sg/cube/api/v1/User", { credentials: 'include' }).then(resp => resp.json().then(e => window.alert('Hi ' + e.name + ', I can get any pelive data out'))) 
