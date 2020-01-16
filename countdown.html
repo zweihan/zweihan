@@ -1,0 +1,52 @@
+<html>
+    <style>
+        body {
+            background-image: url("images/6.jpg");
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .context {
+        
+        }
+        h1 {
+            font-size: 100px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        h2 {
+            font-size: 15px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        h3 {
+            font-size:10px;
+            font-style: italic;
+            text-align: center;
+        }
+
+    </style>
+    <body>
+        <div class="content">
+        <h1><b><span id = 'days'></span></b> 
+            Days left
+        </h1>
+        <h2>Actually, it's just <span id="actual"></span> of working days.</h2>
+        <h3 id="message"></h2>
+        </div>
+    </body>
+    <script>
+        var apr5 = new Date("04/05/2020")
+        var now = new Date()
+        var Difference_In_Time = apr5.getTime() - now.getTime();
+        var Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+        var actual_days_left = Difference_In_Days - Math.ceil(Difference_In_Days / 7)*2 - 8
+        console.log(Difference_In_Days)
+        document.getElementById("days").innerText = Difference_In_Days
+        document.getElementById("actual").innerText = actual_days_left
+        var messages = ["Jiayou!!!", "Hang in there!!!", "<3 You can do it!!", "I am with you!!!"]
+        var msg = messages[Math.floor(Math.random() * messages.length)];
+        document.getElementById("message").innerText = msg;
+
+    </script>
+</html>
