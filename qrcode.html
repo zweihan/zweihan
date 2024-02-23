@@ -1,0 +1,72 @@
+<html>
+    <style>
+        body {
+            background-image: url("images/bg.jpg");
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .context {
+        
+        }
+        h1, input, label{
+            font-size: 50px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        h2 {
+            font-size: 15px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        h3 {
+            font-size:10px;
+            font-style: italic;
+            text-align: center;
+        }
+        qrcode {
+          width: 100px;
+          height: 100px;
+          margin-top:15px;
+        }
+
+    </style>
+    <body>
+        <div class="content" id="input-area">
+          <label for="input">Enter order ID:</label>
+        <input id="input" name="input" type="text"></input>
+        <input id="submit" name="submit" type="submit"></input>
+        <div id="qrcode"></div>
+        </div>
+        <div class="content" id="data-area" hidden="true">
+          <h1 id="data-display"></h1>
+        </div>
+    </body>
+    <script type="text/javascript" src="./qrcode.min.js"></script>
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const data = urlParams.get('data');
+      if(data) {
+        var inputArea = document.getElementById("input-area");
+        inputArea.hidden = true;
+        var dataDisplay = document.getElementById("data-display");
+        dataDisplay.innerText = data;
+        var dataArea = document.getElementById("data-area");
+        dataArea.hidden = false;
+      }
+
+      var input = document.getElementById("input");
+      var submit = document.getElementById("submit");
+      submit.addEventListener("click", function(){
+          var order_id = input.value;
+          var url = "https://zweihan.com/qrcode.html?data=" + order_id;
+          var qrcode = new QRCode(document.getElementById("qrcode"), {
+              width: 100,
+              height: 100,
+          });
+          qrcode.makeCode(url);
+      });
+    </script>
+</html>
